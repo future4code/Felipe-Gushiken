@@ -64,23 +64,26 @@ function retornaExpressoesBooleanas() {
   return resposta
 }
 
-// EXERCÍCIO 07
+// EXERCÍCIO 07 **
 function retornaNNumerosPares(n) {
   let pares = []
 
-    for (let i = 0; i < n * 2; i++){
-      if (i % 2 ===0){
-        pares.push(i)
-      }
+    for (let i = 0; i < n; i++){
+      pares.push(2 * i)
     }
-    return pares
-}
+        return pares
+    }
 
 // EXERCÍCIO 08
 function checaTriangulo(a, b, c) {
-  // return 'Escaleno'
-  // return 'Equilátero'
-  // return 'Isósceles'
+
+  if (a !== b && b !== c){
+    return "Escaleno"
+  } else if (a === b && b === c){
+    return "Equilátero"
+  } else {
+    return "Isósceles"
+  }
 }
 
 // EXERCÍCIO 09
