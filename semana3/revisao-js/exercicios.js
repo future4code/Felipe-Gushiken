@@ -49,7 +49,7 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 05
 function retornaQuantidadeElementos(array) {
-  const tamanhoArray = (array.length - 1)
+  const tamanhoArray = (array.length)
   return tamanhoArray
 }
 
