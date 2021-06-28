@@ -94,9 +94,6 @@ function comparaDoisNumeros(num1, num2) {
   //   maiorDivisivelPorMenor: Y,
   //   diferenca: Z
   // }
-  // const maiorNumero = (Math.max(num1, num2))
-  // const maiorDivisivelporMenor = Math.max(num1, num2) % Math.min(num1, num2) === 0
-  // const diferenca = Math.max(num1, num2) - Math.min(num1, num2)
   return {
     maiorNumero: Math.max(num1, num2), 
     maiorDivisivelPorMenor: Math.max(num1, num2) % Math.min(num1, num2) === 0, 
@@ -106,32 +103,65 @@ function comparaDoisNumeros(num1, num2) {
 
 // EXERCÍCIO 10
 function segundoMaiorEMenor(array) {
+  const arrayMaiorEMenor =[]
+
 
 }
 
 // EXERCÍCIO 11
 function ordenaArray(array) {
+  const arrayOrdenado = []
 
 }
 
 // EXERCÍCIO 12
 function filmeFavorito() {
-
+  const filmeFavorito = {
+    nome: "O Diabo Veste Prada",
+    ano: 2006,
+    diretor: "David Frankel",
+    atores: ["Meryl Streep", "Anne Hathaway", "Emily Blunt", "Stanley Tucci"]
+  }
+  return filmeFavorito
 }
 
 // EXERCÍCIO 13
 function imprimeChamada() {
+  const filmeFavorito = {
+    nome: "O Diabo Veste Prada",
+    ano: 2006,
+    diretor: "David Frankel",
+    atores: ["Meryl Streep", "Anne Hathaway", "Emily Blunt", "Stanley Tucci"]
+  }
+  return `Venha assistir ao filme ${filmeFavorito.nome}, de ${filmeFavorito.ano}, dirigido por ${filmeFavorito.diretor} e estrelado por ${filmeFavorito.atores[0]}, ${filmeFavorito.atores[1]}, ${filmeFavorito.atores[2]}, ${filmeFavorito.atores[3]}.`
+
   // "Venha assistir ao filme NOME_DO_FILME, de ANO, dirigido por DIRECAO e estrelado por ELENCO."
 }
 
 // EXERCÍCIO 14
 function criaRetangulo(lado1, lado2) {
-
+  const retangulo = {
+    largura: lado1,
+    altura: lado2,
+    perimetro: 2 * (lado1 + lado2),
+    area: lado1 * lado2
+  }
+  return retangulo
 }
 
 // EXERCÍCIO 15
 function anonimizaPessoa(pessoa) {
-
+  const pessoa1 = {
+    nome: "Astrodev",
+    idade: 25,
+    email: "astrodev@labenu.com.br",
+    endereco: "Rua do Futuro, 4"
+  }
+  const novaPessoa = {
+    ...pessoa1,
+    nome: "ANÔNIMO"
+  }
+  return novaPessoa
 }
 
 // EXERCÍCIO 16A
