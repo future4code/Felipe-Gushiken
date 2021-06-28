@@ -55,12 +55,25 @@ function retornaQuantidadeElementos(array) {
 
 // EXERCÍCIO 06
 function retornaExpressoesBooleanas() {
+  const booleano1 = true
+  const booleano2 = false
+  const booleano3 = !booleano2 
+  const booleano4 = !booleano3
 
+  const resposta = [(booleano1 && booleano2 && !booleano4), ((booleano1 && booleano2) || !booleano3), ((booleano2 || booleano3) && (booleano4 || booleano1)), (!(booleano2 && booleano3) || !(booleano1 && booleano3)), (!(booleano1) && !(booleano3) || (!booleano4 && booleano3 && booleano3))]
+  return resposta
 }
 
 // EXERCÍCIO 07
 function retornaNNumerosPares(n) {
+  let pares = []
 
+    for (let i = 0; i < n * 2; i++){
+      if (i % 2 ===0){
+        pares.push(i)
+      }
+    }
+    return pares
 }
 
 // EXERCÍCIO 08
