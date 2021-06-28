@@ -94,6 +94,14 @@ function comparaDoisNumeros(num1, num2) {
   //   maiorDivisivelPorMenor: Y,
   //   diferenca: Z
   // }
+  // const maiorNumero = (Math.max(num1, num2))
+  // const maiorDivisivelporMenor = Math.max(num1, num2) % Math.min(num1, num2) === 0
+  // const diferenca = Math.max(num1, num2) - Math.min(num1, num2)
+  return {
+    maiorNumero: Math.max(num1, num2), 
+    maiorDivisivelPorMenor: Math.max(num1, num2) % Math.min(num1, num2) === 0, 
+    diferenca: Math.max(num1, num2) - Math.min(num1, num2)
+}
 }
 
 // EXERCÍCIO 10
