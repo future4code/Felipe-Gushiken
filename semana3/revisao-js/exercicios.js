@@ -16,10 +16,10 @@ function retornaNumerosParesElevadosADois(array) {
 
     for (let i = 0; i < array.length; i++){
       if(array[i] % 2 === 0){
-      arrayDeNumerosParesElevadosADois.push(array[i] ** 2)
+      arrayDeNumerosParesElevadosADois.push(array[i] * array[i])
     }
-    return arrayDeNumerosParesElevadosADois
   }
+  return arrayDeNumerosParesElevadosADois
 } 
 
 // EXERCÍCIO 03
@@ -30,25 +30,27 @@ function retornaNumerosPares(array) {
       if(array[i] % 2 === 0){
         arrayDeNumerosPares.push(array[i])
       }
-      return arrayDeNumerosPares
     }
+    return arrayDeNumerosPares
 }
 
 // EXERCÍCIO 04
 function retornaMaiorNumero(array) {
+  // return Math.max(...array)
   let maiorNumero = -Infinity
 
     for (let i = 0; i < array.length; i++){
       if (array[i] > maiorNumero){
         maiorNumero = array[i]
       }
-      return maiorNumero
     }
+    return maiorNumero
 }
 
 // EXERCÍCIO 05
 function retornaQuantidadeElementos(array) {
-  
+  const tamanhoArray = (array.length - 1)
+  return tamanhoArray
 }
 
 // EXERCÍCIO 06
