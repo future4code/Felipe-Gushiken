@@ -176,7 +176,7 @@ function menoresDe18(arrayDePessoas) {
 
 // EXERCÍCIO 17A
 function multiplicaArrayPor2(array) {
-  
+
 }
 
 // EXERCÍCIO 17B
@@ -191,12 +191,18 @@ function verificaParidade(array) {
 
 // EXERCÍCIO 18A
 function retornaPessoasAutorizadas(pessoas) {
-
+  const pessoasAutorizadas = pessoas.filter((elemento) => {
+    return elemento.altura >= 1.5 && elemento.idade > 14 && elemento.idade < 60
+  })
+  return pessoasAutorizadas
 }
 
 // EXERCÍCIO 18B
 function retornaPessoasNaoAutorizadas(pessoas) {
-
+  const pessoasNaoAutorizadas = pessoas.filter((elemento) => {
+    return elemento.altura < 1.5 || elemento.idade <= 14 || elemento.idade >= 60
+  })
+  return pessoasNaoAutorizadas
 }
 
 // EXERCÍCIO 19A
