@@ -85,6 +85,14 @@ div img {
     font-size: 60px;
 }
 
+.centralizar-botao{
+    margin: 10px 70px 10px 70px;
+    text-align: center;
+    position: relative;
+    top: 10vh;
+    right: 75vh;
+}
+
 
 /**
   *
