@@ -34,7 +34,11 @@ div>p:first-child {
 }
 
 div img {
-    background: black;
+    /* background: black; */
+    max-width:80px;
+    max-height:80px;
+    width: auto;
+    height: auto;
 }
 
 .botao-amarelo {
