@@ -69,7 +69,9 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
+    padding-top: 70px;
 }
+
 
 #container-de-descricao>ol {
     padding: 15px 0px;
@@ -83,14 +85,15 @@ div img {
     color: #c44f00;
     padding: 100px 0;
     font-size: 60px;
+    margin: 55vh;
 }
 
 .centralizar-botao{
     margin: 10px 70px 10px 70px;
     text-align: center;
     position: relative;
-    top: 10vh;
-    right: 75vh;
+    top: 5vh;
+    right: 0vh;
 }
 
 
