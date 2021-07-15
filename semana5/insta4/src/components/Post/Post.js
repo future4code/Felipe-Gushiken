@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styled from 'styled-components'
 
@@ -51,9 +52,13 @@ class Post extends React.Component {
   onClickCurtida = () => {
     console.log('Curtiu!')
     this.setState({
-      curtido: true,
-      numeroCurtidas: this.state.numeroCurtidas + 1
+      curtido: !this.state.curtido,
     })
+    if(this.state.numeroCurtidas ===0){
+      this.setState({numeroCurtidas: 1})
+    } else{
+      this.setState({numeroCurtidas: 0})
+    }
   }
 
   onClickComentario = () => {
