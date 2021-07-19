@@ -1,10 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const CentralizaFomrulario = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+`
+
 class Final extends React.Component {
     render(){
         return (
-            <div>
+            <CentralizaFomrulario>
                 <h2>
                     AS PERGUNTAS ACABARAM!
                 </h2>
@@ -14,7 +20,7 @@ class Final extends React.Component {
                 <h4>
                     Entraremos em contato!
                 </h4>
-            </div>
+            </CentralizaFomrulario>
         )
     }
 }

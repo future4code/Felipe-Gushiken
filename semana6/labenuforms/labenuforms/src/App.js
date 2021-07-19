@@ -6,7 +6,20 @@ import Etapa3 from './components/Etapa3'
 import Final from './components/Final'
 
 const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  button{
+    margin-top: 15px;
+    width: 8vw;
+
+    :hover{
+      cursor: pointer;
+      background-color: lightgrey;
+    }
+  }
 `
 
 class App extends React.Component {
@@ -31,11 +44,16 @@ class App extends React.Component {
     this.setState ({etapa: this.state.etapa + 1})
   }
 
+  irParaEtapaAnterior = () => {
+    this.setState ({etapa: this.state.etapa - 1})
+  }
+
   render() {
     return (
       <MainContainer>
         {this.renderizaEtapa()}
-        <button onClick={this.irParaProximaEtapa}>Próxima etapa</button>
+        {this.state.etapa >= 4 ? "" : <button onClick={this.irParaProximaEtapa}>Próxima etapa</button>}
+        {this.state.etapa < 2 ? "" : <button onClick={this.irParaEtapaAnterior}>Voltar</button>}
       </MainContainer>
     )
   }

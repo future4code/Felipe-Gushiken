@@ -1,10 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const CentralizaFomrulario = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+input{
+    width: 15vw;
+}
+`
+
 class Etapa1 extends React.Component {
     render() {
         return (
-            <div>
+            <CentralizaFomrulario>
                 <h2>
                     ETAPA 1 - DADOS GERAIS
                 </h2>
@@ -13,15 +23,15 @@ class Etapa1 extends React.Component {
                 </h4>
                 <input></input>
                 <h4>
-                    1. Qual sua idade?
+                    2. Qual sua idade?
+                </h4>
+                <input type="Number"></input>
+                <h4>
+                    3. Qual seu e-mail?
                 </h4>
                 <input></input>
                 <h4>
-                    1. Qual seu e-mail?
-                </h4>
-                <input></input>
-                <h4>
-                    1. Qual a sua escolaridade?
+                    4. Qual a sua escolaridade?
                 </h4>
                 <select>
                     <option>Ensino Médio Incompleto</option>
@@ -29,7 +39,7 @@ class Etapa1 extends React.Component {
                     <option>Ensino Superior Incompleto</option>
                     <option>Ensino Superior Completo</option>
                 </select>
-            </div>
+            </CentralizaFomrulario>
         )
     }
 }
