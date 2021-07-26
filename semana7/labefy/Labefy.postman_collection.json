@@ -52,7 +52,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"ROCK\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Instrumental\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +88,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Everything I Need\",\r\n    \"artist\": \"Skylar Grey\",\r\n    \"url\": \"https://www.youtube.com/watch?v=9thM5gLs2tg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Sunset\",\r\n    \"artist\": \"Davich\",\r\n    \"url\": \"https://youtu.be/lUR4XSRvmI8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,7 +112,7 @@
 					"variable": [
 						{
 							"key": "playlistId",
-							"value": "e7ace142-a741-4aaa-8f0c-c30439fa8bdc"
+							"value": "133d1254-6590-44b5-90e7-0e480ea4be5d"
 						}
 					]
 				}
@@ -147,7 +147,7 @@
 					"variable": [
 						{
 							"key": "playlistId",
-							"value": "e7ace142-a741-4aaa-8f0c-c30439fa8bdc"
+							"value": "133d1254-6590-44b5-90e7-0e480ea4be5d"
 						}
 					]
 				}
@@ -166,7 +166,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/search?name=K-POP",
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/search?name=rock",
 					"protocol": "https",
 					"host": [
 						"us-central1-labenu-apis",
@@ -186,7 +186,7 @@
 						},
 						{
 							"key": "name",
-							"value": "K-POP"
+							"value": "rock"
 						}
 					]
 				}
