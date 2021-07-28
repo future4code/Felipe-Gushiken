@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import TelaDetalhes from './TelaDetalhes'
 
 const MainContainer = styled.div`
     display: flex;
@@ -91,8 +92,6 @@ class TelaLista extends React.Component {
             alert("Usuário não apagado")
         }   
     }
-
-        
 
     render() {
         const listaUsuarios = this.state.usuarios.map((usuario) => {

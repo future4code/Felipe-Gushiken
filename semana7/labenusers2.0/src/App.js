@@ -13,9 +13,9 @@ class App extends React.Component {
       case "cadastro":
         return <TelaCadastro irParaLista={this.irParaLista}/>
       case "lista":
-        return <TelaLista irParaCadastro={this.irParaCadastro}/>
+        return <TelaLista irParaCadastro={this.irParaCadastro} irParaDetalhes={this.irParaDetalhes}/>
       case "detalhes":
-        return <TelaDetalhes irParaDetalhes={this.irParaDetalhes}/>
+        return <TelaDetalhes irParaLista={this.irParaLista} irParaCadastro={this.irParaCadastro}/>
       default:
         return <div>Erro404</div>
     }

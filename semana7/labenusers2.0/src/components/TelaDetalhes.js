@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class TelaDetalhes extends React.Component {
     state = {
-        
+
     }
 
     componentDidMount() {
@@ -20,7 +20,6 @@ class TelaDetalhes extends React.Component {
             }
         })
             .then((resposta) => {
-                alert("Olá")
                 console.log(resposta.data)
             })
             .catch((erro) => {
@@ -30,21 +29,15 @@ class TelaDetalhes extends React.Component {
     }
 
     render() {
-        const detalhesUsuario = this.state.detalhesUsuario.map((usuario) => {
-            return (
-                <div key={usuario.id}>
-                    {usuario.id}
-                    {usuario.name}
-                    {usuario.email}
-                    <button onClick={() => this.mostrarDetalhes(usuario.id)}>DETALHES</button>
-                </div>
-            )
-        })
+        
+
         return (
             <div>
                 <h1>LABENUSERS</h1>
-                <div>{detalhesUsuario}</div>
-                <p>Oláááa</p>
+                {detalhesUsuarios}
+                <button onClick={this.props.irParaCadastro}>INÍCIO</button>
+                <button onClick={this.props.irParaLista}>LISTA</button>
+                <p>In progress</p>
             </div>
         )
     }
