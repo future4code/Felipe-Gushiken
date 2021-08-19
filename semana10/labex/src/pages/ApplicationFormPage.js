@@ -40,6 +40,10 @@ const FormContainer = styled.div`
     input:nth-child(3){
         height: 90px;
     }
+
+    button{
+        margin-top: 10px;
+    }
 `
 
 export const ApplicationFormPage = () => {
@@ -54,6 +58,11 @@ export const ApplicationFormPage = () => {
     const goBack = () => {
         history.goBack()
     }
+
+    const goHome = () => {
+        history.push("/")
+    }
+
 
     const changeName = (event) => {
         setName(event.target.value)
@@ -98,7 +107,7 @@ export const ApplicationFormPage = () => {
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1>LabeX</h1>
+                <h1 onClick={goBack}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={goBack}>

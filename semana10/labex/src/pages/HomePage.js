@@ -48,10 +48,14 @@ export const HomePage = () => {
         history.push("/login")
     }
 
+    const goHome = () => {
+        history.push("/")
+    }
+
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1>LabeX</h1>
+                <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={goToListTripsPage}>

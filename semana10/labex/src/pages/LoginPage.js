@@ -34,6 +34,10 @@ const LoginContainer = styled.main`
         width: 20%;
         height: 40%;
     }
+
+    button{
+        margin-top: 10px;
+    }
 `
 
 export const LoginPage = () => {
@@ -45,6 +49,11 @@ export const LoginPage = () => {
     const goBack = () => {
         history.goBack()
     }
+
+    const goHome = () => {
+        history.push("/")
+    }
+
 
     const submitLogin = () => {
         const body = {
@@ -75,14 +84,11 @@ export const LoginPage = () => {
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1>LabeX</h1>
+                <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={goBack}>
                     VOLTAR
-                </button>
-                <button onClick={submitLogin}>
-                    LOGIN
                 </button>
             </ButtonContainer>
             <LoginContainer>
@@ -96,6 +102,9 @@ export const LoginPage = () => {
                     value={password}
                     onChange={changePassword}
                 ></input>
+                <button onClick={submitLogin}>
+                    LOGIN
+                </button>
             </LoginContainer>
         </MainContainer>
     )

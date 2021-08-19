@@ -56,11 +56,15 @@ export const ListTripsPage = () => {
         history.push("/trips/application")
     }
 
+    const goHome = () => {
+        history.push("/")
+    }
+
+
     const getTrips = () => {
         axios.get(`${baseUrl}/trips`)
             .then((response) => {
                 setTrips(response.data.trips)
-                // console.log(response.data.trips)
             })
             .catch((err) => {
                 console.log(err)
@@ -86,7 +90,7 @@ export const ListTripsPage = () => {
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1>LabeX</h1>
+                <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={backButton}>
