@@ -1,36 +1,16 @@
-import {React, useEffect, useState} from 'react'
-import {useHistory} from 'react-router-dom'
-import styled from 'styled-components'
+import { React, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { baseUrl } from '../constants/url'
-
-const MainContainer = styled.div`
-    width: auto;
-    height: 95%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(240,151,153,1) 0%, rgba(43,22,55,1) 100%, rgba(252,176,69,1) 100%);
-    border: 5px solid #302038;
-`
-const HeaderContainer = styled.header`
-    text-align: center;
-    font-family: 'Train One', cursive;
-    color: #302038;
-`
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-`
+import { MainContainer, HeaderContainer, ButtonContainer, ListTripsContainer } from '../styles/Styled'
 
 export const AdminHomePage = () => {
     const history = useHistory()
 
     const [trips, setTrips] = useState([])
-
+ 
     const goBack = () => {
-        history.goBack()
+        history.push("/login")
     }
 
     const goHome = () => {
@@ -48,7 +28,7 @@ export const AdminHomePage = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        if(token === null) {
+        if (token === null) {
             history.push("/login")
         }
     }, [])
@@ -63,11 +43,31 @@ export const AdminHomePage = () => {
             })
     }
 
+    const deleteTrip = (id) => {
+        const token = localStorage.getItem("token")
+
+        axios.delete(`${baseUrl}/trips/${id}`, {
+            headers: {
+                auth: token
+            }
+        })
+        .then((response) => {
+            getTrips()
+            console.log(response.data.trip)
+        })
+        .catch((err) => {
+            console.log(err.response.data)
+        })
+    }
+
     const showTrips = trips.map((trip) => {
         return (
-            <div>
-                <p key={trip.id} onClick={goToTripsDetailsPage(trip.id)}><b>{trip.name.toUpperCase()}</b></p>
-            </div>
+            <ListTripsContainer>
+                <p key={trip.id} onClick={() => goToTripsDetailsPage(trip.id)}>
+                    <b>{trip.name.toUpperCase()}</b>
+                </p>
+                <img src="https://img.icons8.com/plasticine/100/000000/delete-sign.png" alt="Imagem de apagar" onClick={() => deleteTrip(trip.id)}/>
+            </ListTripsContainer>
         )
     })
 
@@ -82,15 +82,14 @@ export const AdminHomePage = () => {
                 <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
-            <button onClick={goBack}>
-                VOLTAR
-            </button>
-            <button onClick={goToCreateTripPage}>
-                CRIAR VIAGEM
-            </button>
+                <button onClick={goBack}>
+                    LOGOUT
+                </button>
+                <button onClick={goToCreateTripPage}>
+                    CRIAR VIAGEM
+                </button>
             </ButtonContainer>
             {showTrips}
-            <p onClick={goToTripsDetailsPage}>DETALHES DA VIAGEM</p>
         </MainContainer>
     )
 }

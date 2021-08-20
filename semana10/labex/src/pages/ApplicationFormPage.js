@@ -1,59 +1,14 @@
 import axios from 'axios'
-import { React, useState } from 'react'
+import { React} from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
 import { baseUrl } from '../constants/url'
-
-const MainContainer = styled.div`
-    width: auto;
-    height: 95%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(240,151,153,1) 0%, rgba(43,22,55,1) 100%, rgba(252,176,69,1) 100%);
-    border: 5px solid #302038;
-`
-const HeaderContainer = styled.header`
-    text-align: center;
-    font-family: 'Train One', cursive;
-    color: #302038;
-`
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-`
-
-const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    
-    input{
-        margin-top: 10px;
-        width: 30%;
-        height: 40%;
-    }
-
-    input:nth-child(3){
-        height: 90px;
-    }
-
-    button{
-        margin-top: 10px;
-    }
-`
+import useForm from '../hooks/useForm'
+import { MainContainer, HeaderContainer, ButtonContainer, FormContainer } from '../styles/Styled'
 
 export const ApplicationFormPage = () => {
     const history = useHistory()
 
-    const [name, setName] = useState("")
-    const [age, setAge] = useState("")
-    const [applicationText, setApplicationText] = useState("")
-    const [profession, setProfession] = useState("")
-    const [country, setCountry] = useState("")
+    const {form, onChange} = useForm({name: "", age: "", applicationText: "", profession: "", country: ""})
 
     const goBack = () => {
         history.goBack()
@@ -63,39 +18,11 @@ export const ApplicationFormPage = () => {
         history.push("/")
     }
 
+    const applyTotrip = (event, id) => {
+        event.preventDefault()
 
-    const changeName = (event) => {
-        setName(event.target.value)
-    }
-
-    const changeAge = (event) => {
-        setAge(event.target.value)
-    }
-
-    const changeApplicationText = (event) => {
-        setApplicationText(event.target.value)
-    }
-
-    const changeProfession = (event) => {
-        setProfession(event.target.value)
-    }
-
-    const changeCountry = (event) => {
-        setCountry(event.target.value)
-    }
-
-    const applyTotrip = (id) => {
-
-        const body = {
-            "name": name,
-            "age": age,
-            "applicationText": applicationText,
-            "profession": profession,
-            "country": country
-        }
-
-        axios.post(`${baseUrl}/trips/${id}/apply`, body)
-            .then((response) => {
+        axios.post(`${baseUrl}/trips/${id}/apply`, form)
+            .then(() => {
                 alert("Solicitação enviada!")
                 ({setName: "", setAge: "", setApplicationText: "", setProfession: "", setCountry: ""})
             })
@@ -107,40 +34,45 @@ export const ApplicationFormPage = () => {
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1 onClick={goBack}>LabeX</h1>
+                <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={goBack}>
                     VOLTAR
                 </button>
             </ButtonContainer>
-            <FormContainer>
+            <FormContainer onSubmit={applyTotrip}>
                 <input
+                    name="name"
                     placeholder="NOME"
-                    value={name}
-                    onChange={changeName}
+                    value={form.name}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="age"
                     placeholder="IDADE"
-                    value={age}
-                    onChange={changeAge}
+                    value={form.age}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="applicationText"
                     placeholder="DESCREVA A SUA MOTIVAÇÃO PARA ESSA VIAGEM"
-                    value={applicationText}
-                    onChange={changeApplicationText}
+                    value={form.applicationText}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="profession"
                     placeholder="PROFISSÃO"
-                    value={profession}
-                    onChange={changeProfession}
+                    value={form.profession}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="country"
                     placeholder="PAÍS DE ORIGEM"
-                    value={country}
-                    onChange={changeCountry}
+                    value={form.country}
+                    onChange={onChange}
                 ></input>
-                <button onClick={applyTotrip}>ENVIAR</button>
+                <button>ENVIAR</button>
             </FormContainer>
         </MainContainer>
     )

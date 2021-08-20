@@ -1,111 +1,40 @@
 import axios from 'axios'
-import { React, useState } from 'react'
+import { React } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
 import { baseUrl } from '../constants/url'
-
-const MainContainer = styled.div`
-    width: auto;
-    height: 95%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(240,151,153,1) 0%, rgba(43,22,55,1) 100%, rgba(252,176,69,1) 100%);
-    border: 5px solid #302038;
-`
-const HeaderContainer = styled.header`
-    text-align: center;
-    font-family: 'Train One', cursive;
-    color: #302038;
-`
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-`
-const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    
-    input{
-        margin-top: 10px;
-        width: 30%;
-        height: 40%;
-    }
-
-    input:nth-child(4){
-        height: 90px;
-    }
-
-    button{
-        margin-top: 10px;
-    }
-`
+import useForm from '../hooks/useForm'
+import { MainContainer, HeaderContainer, ButtonContainer, FormContainer } from '../styles/Styled'
 
 export const CreateTripPage = () => {
     const history = useHistory()
 
-    const [name, setName] = useState("")
-    const [planet, setPlanet] = useState("")
-    const [date, setDate] = useState("")
-    const [description, setDescription] = useState("")
-    const [durationInDays, setDurationInDays] = useState("")
+    const {form, onChange} = useForm({name: "", planet: "", date: "", description: "", durationInDays: ""})
 
-    const goBack = () => {
-        history.goBack()
+    const goToPreviousPage = () => {
+        history.push("/admin/trips/list")
     }
 
     const goHome = () => {
         history.push("/")
     }
 
-
-    const createTrip = () => {
+    const createTrip = (event) => {
+        event.preventDefault()
         const token = localStorage.getItem("token")
 
-        const body = {
-            "name": name,
-            "planet": planet,
-            "date": date,
-            "description": description,
-            "durationInDays": durationInDays
-        }
-
-        axios.post(`${baseUrl}/trips`, body, {
+        axios.post(`${baseUrl}/trips`, form, {
             headers: {
                 auth: token
             }
         })
             .then((response) => {
                 alert("Viagem criada!")
-                    ({ setName: "", setPlanet: "", setDate: "", setDescription: "", setDurationInDays: "" })
+                console.log(response.data.trip)
+                // ({ setName: "", setPlanet: "ESCOLHA O DESTINO", setDate: "", setDescription: "", setDurationInDays: "" })
             })
             .catch((err) => {
-
+                console.log(err.response)
             })
-    }
-
-    const changeName = (event) => {
-        setName(event.target.value)
-    }
-
-    const changePlanet = (event) => {
-        setPlanet(event.target.value)
-    }
-
-    const changeDate = (event) => {
-        setDate(event.target.value)
-    }
-
-    const changeDescription = (event) => {
-        setDescription(event.target.value)
-    }
-
-    const changeDurationInDays = (event) => {
-        setDurationInDays(event.target.value)
     }
 
     return (
@@ -114,37 +43,66 @@ export const CreateTripPage = () => {
                 <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
-                <button onClick={goBack}>
+                <button onClick={goToPreviousPage}>
                     VOLTAR
                 </button>
             </ButtonContainer>
-            <FormContainer>
+            <FormContainer onSubmit={createTrip}>
                 <input
+                    name="name"
                     placeholder="NOME"
-                    value={name}
-                    onChange={changeName}
+                    type="text"
+                    value={form.name}
+                    onChange={onChange}
                 ></input>
-                <input
+                <select
+                    name="planet"
                     placeholder="PLANETA"
-                    value={planet}
-                    onChange={changePlanet}
-                ></input>
+                    value={form.planet}
+                    onChange={onChange}
+                >
+                    <option>ESCOLHA O DESTINO</option>
+                    <option>ALFHEIM</option>
+                    <option>ASGARD</option>
+                    <option>CONTRAXIA</option>
+                    <option>EGO</option>
+                    <option>HALA</option>
+                    <option>JOTUNHEIM</option>
+                    <option>JUPITER</option>
+                    <option>MARS</option>
+                    <option>MORAG</option>
+                    <option>NORNHEIM</option>
+                    <option>OREX-II</option>
+                    <option>SAKAAR</option>
+                    <option>SATURN</option>
+                    <option>SVARTALFHEIM</option>
+                    <option>TERRA</option>
+                    <option>TITAN</option>
+                    <option>VANAHEIM</option>
+                    <option>VORMIR</option>
+                    <option>XANDAR</option>
+                    <option>ZEN-WHOBERI</option>
+                </select>
                 <input
+                    name="date"
+                    type="date"
                     placeholder="DATA DA PARTIDA"
-                    value={date}
-                    onChange={changeDate}
+                    value={form.date}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="description"
                     placeholder="DESCRIÇÃO DA VIAGEM"
-                    value={description}
-                    onChange={changeDescription}
+                    value={form.description}
+                    onChange={onChange}
                 ></input>
                 <input
+                    name="durationInDays"
                     placeholder="QUANTOS DIAS DE VIAGEM?"
-                    value={durationInDays}
-                    onChange={changeDurationInDays}
+                    value={form.durationInDays}
+                    onChange={onChange}
                 ></input>
-                <button onClick={createTrip}>ENVIAR</button>
+                <button>ENVIAR</button>
             </FormContainer>
         </MainContainer>
     )

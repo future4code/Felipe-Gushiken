@@ -6,8 +6,9 @@ import { AdminHomePage } from '../pages/AdminHomePage'
 import { TripDetailsPage } from '../pages/TripDetailsPage'
 import { CreateTripPage } from '../pages/CreateTripPage'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { useState } from 'react'
 
-export const Router = (id) => {
+export const Router = () => {
     return (
         <BrowserRouter>
             <Switch>
@@ -29,7 +30,7 @@ export const Router = (id) => {
                 </Route>
 
                 <Route exact path={"/admin/trips/list"}>
-                    <AdminHomePage />
+                    <AdminHomePage/>
                 </Route>
 
                 <Route exact path={"/admin/trips/create"}>
@@ -37,7 +38,7 @@ export const Router = (id) => {
                 </Route>
 
                 <Route exact path={`/admin/trips/:id`}>
-                    <TripDetailsPage />
+                    <TripDetailsPage/>
                 </Route>
 
             </Switch>

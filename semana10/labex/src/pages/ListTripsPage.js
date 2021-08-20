@@ -4,26 +4,8 @@ import styled from 'styled-components'
 import { baseUrl } from '../constants/url'
 import axios from 'axios'
 import { useState } from 'react'
+import { MainContainer, HeaderContainer, ButtonContainer } from '../styles/Styled'
 
-const MainContainer = styled.div`
-    width: auto;
-    height: 95%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(240,151,153,1) 0%, rgba(43,22,55,1) 100%, rgba(252,176,69,1) 100%);
-    border: 5px solid #302038;
-`
-const HeaderContainer = styled.header`
-    text-align: center;
-    font-family: 'Train One', cursive;
-    color: #302038;
-`
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-`
 const DisplayContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -40,7 +22,7 @@ const TripsContainer = styled.div`
     margin: 5px 0;
     padding: 0px 10px;
     font-size: 1.2em;
-    color: #302038;
+    color: #fcd4d4;
 `
 
 export const ListTripsPage = () => {
