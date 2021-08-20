@@ -6,7 +6,6 @@ import { AdminHomePage } from '../pages/AdminHomePage'
 import { TripDetailsPage } from '../pages/TripDetailsPage'
 import { CreateTripPage } from '../pages/CreateTripPage'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { useState } from 'react'
 
 export const Router = () => {
     return (

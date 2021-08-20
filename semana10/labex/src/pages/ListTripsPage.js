@@ -5,6 +5,7 @@ import { baseUrl } from '../constants/url'
 import axios from 'axios'
 import { useState } from 'react'
 import { MainContainer, HeaderContainer, ButtonContainer } from '../styles/Styled'
+import "animate.css"
 
 const DisplayContainer = styled.div`
     display: flex;
@@ -15,7 +16,7 @@ const DisplayContainer = styled.div`
 const TripsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid #302038;
+    border: 2px solid #302038;
     border-radius: 2%;
     align-items: center;
     width: 35%;
@@ -56,11 +57,11 @@ export const ListTripsPage = () => {
     const showTrips = trips.map((trip) => {
         return (
             <TripsContainer>
-                <p key={trip.id}><b>{trip.name.toUpperCase()}</b></p>
-                <p>Pra onde? <b>{trip.planet}</b></p>
-                <p>{trip.description}</p>
-                <p>Quando? <b>{trip.date}</b></p>
-                <p>Duração: <b>{trip.durationInDays}</b></p>
+                <h2 class="animate__animated animate__slideInDown" key={trip.id}><b>{trip.name.toUpperCase()}</b></h2>
+                <p class="animate__animated animate__slideInDown">Pra onde? <b>{trip.planet}</b></p>
+                <p class="animate__animated animate__slideInDown">{trip.description}</p>
+                <p class="animate__animated animate__slideInDown">Quando? <b>{trip.date}</b></p>
+                <p class="animate__animated animate__slideInDown">Duração: <b>{trip.durationInDays} dias</b></p>
             </TripsContainer>
         )
     })

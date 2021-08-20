@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { baseUrl } from '../constants/url'
-import { MainContainer, HeaderContainer, ButtonContainer } from '../styles/Styled'
+import { MainContainer, HeaderContainer, ButtonContainer, DetailsContainer, DetailsBox } from '../styles/Styled'
+import "animate.css"
 
 export const TripDetailsPage = () => {
     const history = useHistory()
@@ -71,16 +72,17 @@ export const TripDetailsPage = () => {
 
     const showTripDetails = () => {
         return (
-            <div>
+            <DetailsContainer>
+                <DetailsBox>
+                    <h2 class="animate__animated animate__pulse">{tripDetails.name}</h2>
+                    <p class="animate__animated animate__pulse">Planeta: {tripDetails.planet}</p>
+                    <p class="animate__animated animate__pulse">Descrição: {tripDetails.description}</p>
+                    <p class="animate__animated animate__pulse">Data de embarque: {tripDetails.date}</p>
+                    <p class="animate__animated animate__pulse">Quantos dias? {tripDetails.durationInDays}</p>
+                </DetailsBox>
+                <hr />
                 <div>
-                    <p>{tripDetails.name}</p>
-                    <p>{tripDetails.planet}</p>
-                    <p>{tripDetails.description}</p>
-                    <p>{tripDetails.date}</p>
-                    <p>{tripDetails.durationInDays}</p>
-                </div>
-                <div>
-                    <h4>CONFIRMADOS</h4>
+                    <h3>CONFIRMADOS</h3>
                     {tripDetails.approved.map((user) => {
                         return (
                             <ul>
@@ -94,7 +96,7 @@ export const TripDetailsPage = () => {
                     })}
                 </div>
                 <div>
-                    <h4>CANDIDATOS</h4>
+                    <h3>CANDIDATOS</h3>
                     {tripDetails.candidates.map((user) => {
                         return (
                             <ul>
@@ -108,7 +110,7 @@ export const TripDetailsPage = () => {
                         )
                     })}
                 </div>
-            </div>
+            </DetailsContainer>
         )
     }
 

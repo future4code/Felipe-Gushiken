@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { baseUrl } from '../constants/url'
 import { MainContainer, HeaderContainer, ButtonContainer, ListTripsContainer } from '../styles/Styled'
+import "animate.css"
 
 export const AdminHomePage = () => {
     const history = useHistory()
@@ -63,10 +64,10 @@ export const AdminHomePage = () => {
     const showTrips = trips.map((trip) => {
         return (
             <ListTripsContainer>
-                <p key={trip.id} onClick={() => goToTripsDetailsPage(trip.id)}>
+                <h3 class="animate__animated animate__fadeInDown" key={trip.id} onClick={() => goToTripsDetailsPage(trip.id)}>
                     <b>{trip.name.toUpperCase()}</b>
-                </p>
-                <img src="https://img.icons8.com/plasticine/100/000000/delete-sign.png" alt="Imagem de apagar" onClick={() => deleteTrip(trip.id)}/>
+                </h3>
+                <img class="animate__animated animate__fadeInDown" src="https://img.icons8.com/plasticine/100/000000/delete-sign.png" alt="Imagem de apagar" onClick={() => deleteTrip(trip.id)}/>
             </ListTripsContainer>
         )
     })

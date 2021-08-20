@@ -61,7 +61,7 @@ export const CreateTripPage = () => {
                     value={form.planet}
                     onChange={onChange}
                 >
-                    <option>ESCOLHA O DESTINO</option>
+                    <option value={""} disabled>ESCOLHA O DESTINO</option>
                     <option>ALFHEIM</option>
                     <option>ASGARD</option>
                     <option>CONTRAXIA</option>
