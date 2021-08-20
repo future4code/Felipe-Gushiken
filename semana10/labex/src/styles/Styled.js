@@ -14,6 +14,7 @@ export const MainContainer = styled.div`
         font-size: 2.1em;
     }
 `
+
 export const HeaderContainer = styled.header`
     text-align: center;
     font-family: 'Train One', cursive;
@@ -23,6 +24,7 @@ export const HeaderContainer = styled.header`
         cursor: pointer;
     }
 `
+
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -36,7 +38,21 @@ export const ButtonContainer = styled.div`
     button:hover{
         transform: scale(1.05);
     }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 680px) {
+    justify-content: center;
+    flex-direction: column;
+    width: 35vw;
+    height: 10vh;
+    margin: 0 auto 10px auto;   
+
+    button{
+        height: 5vh;
+    }
+
+    }
 `
+
 export const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
@@ -67,7 +83,29 @@ export const FormContainer = styled.form`
     button:hover{
         transform: scale(1.1);
     }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        /* width: 100vw; */
+
+        input{
+            width: 80vw;
+            height: 8vh;
+        }
+
+        select{
+            width: 82vw;
+            height: 7vh;
+        }
+
+        button{
+            height: 5vh;
+        }
+    }
 `
+
 export const LoginContainer = styled.form`
     display: flex;
     flex-direction: column;
@@ -89,7 +127,30 @@ export const LoginContainer = styled.form`
     button:hover{
         transform: scale(1.1);
     }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        /* width: 100vw; */
+
+        input{
+            width: 80vw;
+            height: 8vh;
+        }
+
+        select{
+            width: 82vw;
+            height: 7vh;
+        }
+
+        button{
+            height: 5vh;
+            width: 30vw;
+        }
+    }
 `
+
 export const ListTripsContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -98,7 +159,7 @@ export const ListTripsContainer = styled.div`
     border: 2px solid #302038;
     border-radius: 2%;
     width: 25vw;
-    margin: 20px auto 10px auto;
+    margin: 10px auto 10px auto;
     font-family: 'Overlock SC', cursive;
 
     h3{
@@ -106,12 +167,12 @@ export const ListTripsContainer = styled.div`
     }
 
     p{
-        margin-top: 10px;
         text-align: center;
         cursor: pointer;
     }
 
     img{
+        margin-bottom: 10px;
         height: 50px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
@@ -119,6 +180,13 @@ export const ListTripsContainer = styled.div`
 
     img:hover{
         transform: scale(1.1);
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        width: 80vw;
     }
 `
 
@@ -130,8 +198,35 @@ export const DetailsContainer = styled.div`
     margin: 10px auto 0 auto;
     border: 2px solid #302038;
     width: 30vw;
+
+    h3{
+        text-align: center;
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        width: 80vw;
+    }
 `
 
 export const DetailsBox = styled.div`
     text-align: center;
+`
+
+export const TravelersContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    button{
+        align-self: center;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    button:hover{
+        transform: scale(1.1);
+    }
 `

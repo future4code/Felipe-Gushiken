@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { baseUrl } from '../constants/url'
-import { MainContainer, HeaderContainer, ButtonContainer, DetailsContainer, DetailsBox } from '../styles/Styled'
+import { MainContainer, HeaderContainer, ButtonContainer, DetailsContainer, DetailsBox, CandidatesContainer, TravelersContainer } from '../styles/Styled'
 import "animate.css"
 
 export const TripDetailsPage = () => {
@@ -11,6 +11,8 @@ export const TripDetailsPage = () => {
     const params = useParams()
 
     const idTrips = params.id
+
+    const candidateId = params.id
 
     const [tripDetails, setTripDetails] = useState({ candidates: [], approved: [] })
 
@@ -39,20 +41,20 @@ export const TripDetailsPage = () => {
             })
     }
 
-    const decideCandidate = (candidateId) => {
+    const decideCandidate = (idTrips, candidateId, decision, setTripDetails) => {
         const token = localStorage.getItem("token")
 
         const body = {
-            "approve": true
+            "approve": decision
         }
 
-        axios.put(`${baseUrl}/trips/${params.id}/candidates/${candidateId}/decide`, body, {
+        axios.put(`${baseUrl}/trips/${idTrips}/candidates/${candidateId}/decide`, body, {
             headers: {
                 auth: token
             }
         })
-        .then((response) => {
-            console.log(response.data)
+        .then(() => {
+            setTripDetails()
         })
         .catch((err) => {
             console.log(err.response)
@@ -61,6 +63,10 @@ export const TripDetailsPage = () => {
 
     useEffect(() => {
         getTripDetail(idTrips)
+    }, [])
+
+    useEffect(() => {
+        decideCandidate(candidateId)
     }, [])
 
     useEffect(() => {
@@ -81,35 +87,36 @@ export const TripDetailsPage = () => {
                     <p class="animate__animated animate__pulse">Quantos dias? {tripDetails.durationInDays}</p>
                 </DetailsBox>
                 <hr />
-                <div>
+                <TravelersContainer>
                     <h3>CONFIRMADOS</h3>
                     {tripDetails.approved.map((user) => {
                         return (
                             <ul>
                                 <li>{user.name}</li>
-                                <li>{user.age}</li>
+                                <li>{user.age} anos</li>
                                 <li>{user.applicationText}</li>
                                 <li>{user.profession}</li>
                                 <li>{user.country}</li>
                             </ul>
                         )
                     })}
-                </div>
-                <div>
+                </TravelersContainer>
+                <TravelersContainer>
                     <h3>CANDIDATOS</h3>
                     {tripDetails.candidates.map((user) => {
                         return (
                             <ul>
                                 <li>{user.name}</li>
-                                <li>{user.age}</li>
+                                <li>{user.age} anos</li>
                                 <li>{user.applicationText}</li>
                                 <li>{user.profession}</li>
                                 <li>{user.country}</li>
-                                <button onClick={() => decideCandidate()}>APROVAR</button>
+                                <button onClick={() => decideCandidate(tripDetails.id, user.id, true, tripDetails)}>APROVAR</button>
+                                <button onClick={() => decideCandidate(tripDetails.id, user.id, false, tripDetails)}>REPROVAR</button>
                             </ul>
                         )
                     })}
-                </div>
+                </TravelersContainer>
             </DetailsContainer>
         )
     }

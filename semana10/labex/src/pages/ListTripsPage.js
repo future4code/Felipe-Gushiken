@@ -19,11 +19,18 @@ const TripsContainer = styled.div`
     border: 2px solid #302038;
     border-radius: 2%;
     align-items: center;
-    width: 35%;
-    margin: 5px 0;
+    width: 30%;
+    margin: 4px 0;
     padding: 0px 10px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #fcd4d4;
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        width: 80vw;
+    }
 `
 
 export const ListTripsPage = () => {

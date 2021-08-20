@@ -5,16 +5,8 @@ import MainImage from '../img/homepage_img01.jpg'
 import { MainContainer, HeaderContainer, ButtonContainer } from '../styles/Styled'
 
 const ImageContainer = styled.div`
-    height: 73vh;
+    height: 100%;
 `
-const FooterContainer = styled.div`
-    height: 1vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-`
-
 export const HomePage = () => {
     const history = useHistory()
 
@@ -45,12 +37,7 @@ export const HomePage = () => {
             </ButtonContainer>
             <ImageContainer>
             <img src={MainImage} height="100%" width="100%" alt="Imagem do espaço"></img>
-            </ImageContainer>  
-            <FooterContainer>
-                <h4>
-                    Desenvolvido por Gush, 2021
-                </h4>    
-            </FooterContainer>       
+            </ImageContainer>   
         </MainContainer>
     )
 }

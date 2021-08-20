@@ -11,7 +11,7 @@ export const LoginPage = () => {
     const {form, onChange} = useForm({email: "", password: ""})
 
     const goBack = () => {
-        history.goBack("/login")
+        history.push("/")
     }
 
     const goHome = () => {
