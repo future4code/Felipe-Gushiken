@@ -4,26 +4,9 @@ import styled from 'styled-components'
 import { baseUrl } from '../constants/url'
 import axios from 'axios'
 import { useState } from 'react'
+import { MainContainer, HeaderContainer, ButtonContainer } from '../styles/Styled'
+import "animate.css"
 
-const MainContainer = styled.div`
-    width: auto;
-    height: 95%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(240,151,153,1) 0%, rgba(43,22,55,1) 100%, rgba(252,176,69,1) 100%);
-    border: 5px solid #302038;
-`
-const HeaderContainer = styled.header`
-    text-align: center;
-    font-family: 'Train One', cursive;
-    color: #302038;
-`
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-`
 const DisplayContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -33,14 +16,21 @@ const DisplayContainer = styled.div`
 const TripsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid #302038;
+    border: 2px solid #302038;
     border-radius: 2%;
     align-items: center;
-    width: 35%;
-    margin: 5px 0;
+    width: 30%;
+    margin: 4px 0;
     padding: 0px 10px;
-    font-size: 1.2em;
-    color: #302038;
+    font-size: 1.1em;
+    color: #fcd4d4;
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        display: grid;
+        place-items: center;
+        margin: 10px auto;
+        width: 80vw;
+    }
 `
 
 export const ListTripsPage = () => {
@@ -56,11 +46,15 @@ export const ListTripsPage = () => {
         history.push("/trips/application")
     }
 
+    const goHome = () => {
+        history.push("/")
+    }
+
+
     const getTrips = () => {
         axios.get(`${baseUrl}/trips`)
             .then((response) => {
                 setTrips(response.data.trips)
-                // console.log(response.data.trips)
             })
             .catch((err) => {
                 console.log(err)
@@ -70,11 +64,11 @@ export const ListTripsPage = () => {
     const showTrips = trips.map((trip) => {
         return (
             <TripsContainer>
-                <p key={trip.id}><b>{trip.name.toUpperCase()}</b></p>
-                <p>Pra onde? <b>{trip.planet}</b></p>
-                <p>{trip.description}</p>
-                <p>Quando? <b>{trip.date}</b></p>
-                <p>Duração: <b>{trip.durationInDays}</b></p>
+                <h2 class="animate__animated animate__slideInDown" key={trip.id}><b>{trip.name.toUpperCase()}</b></h2>
+                <p class="animate__animated animate__slideInDown">Pra onde? <b>{trip.planet}</b></p>
+                <p class="animate__animated animate__slideInDown">{trip.description}</p>
+                <p class="animate__animated animate__slideInDown">Quando? <b>{trip.date}</b></p>
+                <p class="animate__animated animate__slideInDown">Duração: <b>{trip.durationInDays} dias</b></p>
             </TripsContainer>
         )
     })
@@ -86,7 +80,7 @@ export const ListTripsPage = () => {
     return (
         <MainContainer>
             <HeaderContainer>
-                <h1>LabeX</h1>
+                <h1 onClick={goHome}>LabeX</h1>
             </HeaderContainer>
             <ButtonContainer>
                 <button onClick={backButton}>

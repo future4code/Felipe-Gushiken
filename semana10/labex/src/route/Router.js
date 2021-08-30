@@ -29,15 +29,15 @@ export const Router = () => {
                 </Route>
 
                 <Route exact path={"/admin/trips/list"}>
-                    <AdminHomePage />
+                    <AdminHomePage/>
                 </Route>
 
                 <Route exact path={"/admin/trips/create"}>
                     <CreateTripPage />
                 </Route>
 
-                <Route exact path={"/admin/trips/:id"}>
-                    <TripDetailsPage />
+                <Route exact path={`/admin/trips/:id`}>
+                    <TripDetailsPage/>
                 </Route>
 
             </Switch>
