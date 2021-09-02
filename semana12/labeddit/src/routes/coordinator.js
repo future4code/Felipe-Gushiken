@@ -13,3 +13,7 @@ export const goToFeed = (history) => {
 export const goToPosts = (history, id) => {
     history.push(`/posts/${id}`)
 }
+
+export const goToHome = (history) => {
+    history.push("/")
+}

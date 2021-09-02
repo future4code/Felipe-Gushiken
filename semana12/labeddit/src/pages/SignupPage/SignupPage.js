@@ -2,11 +2,15 @@ import React from 'react'
 import useUnprotectedPage from '../../hooks/useUnprotectedPage'
 import SignupForm from './SignupForm'
 
-const SignupPage = () => {
+const SignupPage = ({ setRightButtonText, leftButton, setLeftButton }) => {
     useUnprotectedPage()
     return (
         <div>
-            <SignupForm />
+            <SignupForm
+                setRightButtonText={setRightButtonText}
+                leftButton={leftButton}
+                setLeftButton={setLeftButton}
+            />
         </div>
     )
 }

@@ -2,11 +2,26 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, ButtonContainer, HeadContainer } from './styled'
 import Button from '@material-ui/core/Button';
-import { goToFeed, goToLogin, goToSignup } from '../../routes/coordinator'
+import { goToFeed, goToLogin, goToSignup, goToHome } from '../../routes/coordinator'
 import { useHistory } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ rightButtonText, setRightButtonText, leftButton, setLeftButton }) => {
     const history = useHistory()
+    const token = localStorage.getItem("token")
+
+    const logout = () => {
+        localStorage.removeItem("token")
+    }
+
+    const rightButtonAction = () => {
+        if (token) {
+            logout()
+            setRightButtonText("Signup")
+            goToHome(history)
+        } else {
+            goToSignup(history)
+        }
+    }
 
     return (
         <AppBar position="static">
@@ -19,12 +34,12 @@ const Header = () => {
                     <Button
                         color="inherit"
                         onClick={() => goToLogin(history)}
-                    >Login
+                    >{leftButton}
                     </Button>
-                    <Button 
+                    <Button
                         color="inherit"
-                        onClick={() => goToSignup(history)}
-                    >Signup</Button>
+                        onClick={rightButtonAction}
+                    >{rightButtonText}</Button>
                 </ButtonContainer>
             </Toolbar>
         </AppBar>

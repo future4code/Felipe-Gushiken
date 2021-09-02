@@ -6,25 +6,33 @@ import SignupPage from '../pages/SignupPage/SignupPage'
 import FeedPage from '../pages/FeedPage/FeedPage'
 import PostsPage from '../pages/PostsPage/PostsPage'
 
-const Router = () => {
+const Router = ({ setRightButtonText, leftButton, setLeftButton }) => {
     return (
-            <Switch>
-                <Route exact path="/">
-                    <HomePage />
-                </Route>
-                <Route exact path="/login">
-                    <LoginPage />
-                </Route>
-                <Route exact path="/signup">
-                    <SignupPage />
-                </Route>
-                <Route exact path="/feed">
-                    <FeedPage />
-                </Route>
-                <Route exact path="/posts/:id">
-                    <PostsPage />
-                </Route>
-            </Switch>
+        <Switch>
+            <Route exact path="/">
+                <HomePage />
+            </Route>
+            <Route exact path="/login">
+                <LoginPage
+                    setRightButtonText={setRightButtonText}
+                    leftButton={leftButton}
+                    setLeftButton={setLeftButton}
+                />
+            </Route>
+            <Route exact path="/signup">
+                <SignupPage
+                    setRightButtonText={setRightButtonText}
+                    leftButton={leftButton}
+                    setLeftButton={setLeftButton}
+                />
+            </Route>
+            <Route exact path="/feed">
+                <FeedPage />
+            </Route>
+            <Route exact path="/posts/:id">
+                <PostsPage />
+            </Route>
+        </Switch>
     )
 }
 

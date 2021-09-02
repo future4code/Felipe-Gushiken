@@ -6,13 +6,13 @@ import { FormContainer } from './styled'
 import { login } from '../../services/users'
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
     const [form, onChange, clear] = useForm({email: "", password: ""})
     const history = useHistory()
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, clear, history)
+        login(form, clear, history, setRightButtonText, setLeftButton)
     }
 
     return (
