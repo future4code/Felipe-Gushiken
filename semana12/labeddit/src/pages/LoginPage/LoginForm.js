@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import useForm from '../../hooks/useForm';
 import { FormContainer } from './styled'
 import { login } from '../../services/users'
 import { useHistory } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress'
+import logo from '../../img/logo200.png'
 
 const LoginForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
     const [form, onChange, clear] = useForm({email: "", password: ""})
     const history = useHistory()
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, clear, history, setRightButtonText, setLeftButton)
+        login(form, clear, history, setRightButtonText, setLeftButton, setIsLoading)
     }
 
     return (
         <FormContainer>
-            <h1>Página de Login</h1>
+            <img src={logo} alt={"logo do labeddit"}/>
             <form onSubmit={onSubmitForm} noValidate autoComplete="off">
                 <TextField
                     name={"email"}
@@ -48,7 +51,7 @@ const LoginForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
                     color="primary"
                     fullWidth
                 >
-                    Login
+                    {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Login</> }
                 </Button>
             </form>
         </FormContainer>

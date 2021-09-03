@@ -1,18 +1,21 @@
+import { useState } from 'react'
 import useForm from "../../hooks/useForm";
 import { TextField, Button } from '@material-ui/core'
 import { baseUrl } from "../../constants/urls";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import { PostForm } from './styled'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const PostsForm = (props) => {
 
     const params = useParams()
 
     const [form, onChange, clear] = useForm({ body: "" })
+    const [isLoading, setIsLoading] = useState(false)
 
-    const onSubmitComment = (event) => {
-        event.preventDefault()
+    const createComment = (form, clear, setIsLoading) => {
+        setIsLoading(true)
         const body = {
             body: form.body
         }
@@ -22,8 +25,8 @@ const PostsForm = (props) => {
                 Authorization: localStorage.getItem("token")
             }
         })
-            .then((response) => {
-                console.log(response.data)
+            .then(() => {
+                setIsLoading(false)
                 axios.get(`${baseUrl}/posts/${params.id}/comments`, {
                     headers: {
                         Authorization: localStorage.getItem("token")
@@ -38,9 +41,14 @@ const PostsForm = (props) => {
                         console.log(err.response)
                     })
             })
-            .catch((err) => {
-                console.log(err.response)
+            .catch(() => {
+                setIsLoading(false)
             })
+    }
+
+    const onSubmitComment = (event) => {
+        event.preventDefault()
+        createComment(form, clear, setIsLoading)
     }
 
     return (
@@ -61,7 +69,7 @@ const PostsForm = (props) => {
                 variant="contained"
                 color="primary"
             >
-                Post
+                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Post</>}
             </Button>
         </PostForm>
     )

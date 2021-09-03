@@ -1,15 +1,18 @@
+import { useState } from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { SendPostContainer } from './styled'
 import useForm from '../../hooks/useForm'
 import axios from 'axios'
-import { baseUrl } from "../../constants/urls";
+import { baseUrl } from "../../constants/urls"
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const FeedForm = (props) => {
 
     const [form, onChange, clear] = useForm({ title: "", body: "" })
+    const [isLoading, setIsLoading] = useState(false)
 
-    const onSubmitForm = (event) => {
-        event.preventDefault()
+    const createPost = (form, clear, setIsLoading) => {
+        setIsLoading(true)
         const body = {
             title: form.title,
             body: form.body
@@ -20,8 +23,8 @@ const FeedForm = (props) => {
                 Authorization: localStorage.getItem("token")
             }
         })
-        .then((response) => {
-            console.log(response.data)
+        .then(() => {
+            setIsLoading(false)
             axios.get(`${baseUrl}/posts`, {
                 headers: {
                     Authorization: localStorage.getItem("token")
@@ -36,9 +39,14 @@ const FeedForm = (props) => {
                 console.log(err.response)
             })
         })
-        .catch((err) => {
-            console.log(err.response)
+        .catch(() => {
+            setIsLoading(false)
         })
+    }
+
+    const onSubmitForm = (event) => {
+        event.preventDefault()
+        createPost(form, clear, setIsLoading)
     }
 
     return (
@@ -71,7 +79,7 @@ const FeedForm = (props) => {
                     variant="contained"
                     color="primary"
                 >
-                    Post
+                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Post</>}
                 </Button>
             </SendPostContainer>
         </form>

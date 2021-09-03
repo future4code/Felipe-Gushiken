@@ -15,6 +15,11 @@ export const PostContainer = styled.div`
     margin-top: 30px;
     border-radius: 15px;
     box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    background-color: #F9DBD3;
+
+    :hover{
+        background-color: #f5a4a6;
+    }
     
     span{
         margin-left: 10px;
@@ -34,6 +39,11 @@ export const PostContainer = styled.div`
         justify-content: space-around;
         border-top: 1px solid black;
     }
+
+    @media screen and (min-width: 300px) and (max-width: 900px) {
+	    width: 90vw;
+        font-size: 1.3em;
+	}
 `
 export const SendPostContainer = styled.div`
     display: grid;

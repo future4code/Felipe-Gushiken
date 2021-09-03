@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import useForm from '../../hooks/useForm';
 import { FormContainer } from './styled'
 import { signup } from '../../services/users';
 import { useHistory } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress'
+import logo from '../../img/logo200.png'
 
 const SignupForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
     const [form, onChange, clear] = useForm({ username: "", email: "", password: "" })
     const history = useHistory()
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        signup(form, clear, history, setRightButtonText, setLeftButton)
+        signup(form, clear, history, setRightButtonText, setLeftButton, setIsLoading)
     }
 
     return (
         <FormContainer>
-            <h1>Página de Signup</h1>
+            <img src={logo} alt={"logo do labeddit"}/>
             <form onSubmit={onSubmitForm} noValidate autoComplete="off">
                 <TextField
                     name={"username"}
@@ -40,7 +43,6 @@ const SignupForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
                     required
                     error
                     fullWidth
-                    // margin={"normal"}
                 />
                 <TextField
                     name={"password"}
@@ -52,6 +54,7 @@ const SignupForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
                     required
                     error
                     fullWidth
+                    helperText="Must be at least 8 characters "
                 />
                 <Button
                     type={"submit"}
@@ -59,7 +62,7 @@ const SignupForm = ({ setRightButtonText, leftButton, setLeftButton }) => {
                     color="primary"
                     fullWidth
                 >
-                    Signup
+                    {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Signup</> }
                 </Button>
             </form>
         </FormContainer>

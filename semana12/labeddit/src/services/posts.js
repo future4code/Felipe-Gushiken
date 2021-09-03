@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { baseUrl } from '../constants/urls'
-import { useParams } from 'react-router-dom'
-
 
 export const createPost = (body, clear) => {
     axios.post(`${baseUrl}/posts`, body, {

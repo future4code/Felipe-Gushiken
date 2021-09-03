@@ -5,10 +5,9 @@ import useProtectedPage from '../../hooks/useProtectedPage'
 import { baseUrl } from '../../constants/urls'
 import up from '../../img/arrow_up.png'
 import down from '../../img/arrow_down.png'
+import bin from '../../img/trash_bin.png'
 import PostsForm from './PostsForm'
 import { CommentsContainer, MessageContainer, PostVotesContainer } from './styled'
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
 
 
 const PostsPage = () => {
@@ -121,24 +120,28 @@ const PostsPage = () => {
     const showComments = comments.length > 0 ? comments.map((item) => {
         return (
             <CommentsContainer key={item.id}>
-                <span>{item.body} by <strong>{item.username}</strong></span>
+                <span>{item.body} by <strong>{item.username}</strong> on <strong>{item.createdAt.split('T')[0].split('-')[2] + '/' + item.createdAt.split('T')[0].split('-')[1] + '/' + item.createdAt.split('T')[0].split('-')[0]}</strong></span>
                 <PostVotesContainer>
                     <img
                         src={up}
                         alt={"Seta para cima"}
                         onClick={() => like(item.id)}
                     />
-                    {item.userVote}
+                    {item.userVote === null ? 0 : item.userVote}
                     <img
                         src={down}
                         alt={"Seta para baixo"}
                         onClick={() => unlike(item.id)}
                     />
-                    <button onClick={() => deleteCommentVote(item.id)}></button>
+                    <img
+                        src={bin}
+                        alt={"ìcone de lixeira"}
+                        onClick={() => deleteCommentVote(item.id)}
+                    />
                 </PostVotesContainer>
             </CommentsContainer>
         );
-    }) : <MessageContainer>Não há comentários</MessageContainer>;
+    }) : <MessageContainer>There are no comments</MessageContainer>;
 
     return (
         <div>
