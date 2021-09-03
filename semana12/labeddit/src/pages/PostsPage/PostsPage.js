@@ -14,6 +14,7 @@ const PostsPage = () => {
     useProtectedPage()
 
     const params = useParams()
+    console.log(params)
     const [comments, setComments] = useState([])
 
     useEffect(() => {

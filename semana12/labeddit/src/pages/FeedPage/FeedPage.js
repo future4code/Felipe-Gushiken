@@ -128,7 +128,7 @@ const FeedPage = () => {
         return (
             <PostContainer>
                 <p key={post.id}>
-                    <strong>{post.title}</strong> by <strong>{post.username}</strong> on <strong>{post.createdAt.split('T')[0].split('-')[2] + '/' + post.createdAt.split('T')[0].split('-')[1] + '/' + post.createdAt.split('T')[0].split('-')[0]}</strong> at <strong>{post.createdAt.split('T')[1].split('.')[0]}</strong>(GMT)
+                    <strong>{post.title}</strong> by <strong>{post.username}</strong> on <strong>{post.createdAt.split('T')[0].split('-')[2] + '/' + post.createdAt.split('T')[0].split('-')[1] + '/' + post.createdAt.split('T')[0].split('-')[0]}</strong> at <strong>{post.createdAt.split('T')[1].split('.')[0]}</strong> (GMT)
                 </p>
                 <span onClick={() => onClickPostsDetails(post.id)}>{post.body}</span>
                 <div>
