@@ -1,33 +1,125 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import axios from 'axios'
 import { baseUrl } from '../../constants/urls'
 import useProtectedPage from '../../hooks/useProtectedPage'
-import useRequestData from '../../hooks/useRequestData'
-import { FeedContainer, PostContainer, PostVotesContainer } from './styled'
-import FeedForm from './FeedForm'
+import { goToPosts } from '../../routes/coordinator'
 import up from '../../img/arrow_up.png'
 import down from '../../img/arrow_down.png'
-import useForm from '../../hooks/useForm'
-import { createPostVote } from '../../services/posts'
-import { goToPosts } from '../../routes/coordinator'
-import { useHistory } from 'react-router-dom'
+import FeedForm from './FeedForm'
+import { FeedContainer, PostContainer, PostVotesContainer } from './styled'
 
 const FeedPage = () => {
     useProtectedPage()
 
     const history = useHistory()
-    const [form] = useForm({ direction: 1 })
+    const [feed, setFeed] = useState([])
 
-    const onSubmitVote = (event) => {
-        event.preventDefault()
-        createPostVote(form)
-    }
-
-    const [feed, setFeed] = useRequestData([], `${baseUrl}/posts`)
-    console.log(feed)
+    useEffect(() => {
+        axios.get(`${baseUrl}/posts`, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        .then((response) => {
+            setFeed(response.data)
+        })
+        .catch(() => {
+            alert("Não foi possível carregar o fedd")
+        })
+    }, [])
 
     const onClickPostsDetails = (id) => {
         goToPosts(history, id)
     }
+
+    const createPostVote = (direction, id) => {
+        const body = {
+            direction: direction
+        }
+        axios.post(`${baseUrl}/posts/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        .then(() => {
+            axios.get(`${baseUrl}/posts`, {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                setFeed(response.data)
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+        })
+        .catch((err) => {
+            console.log(err.response.data)
+        })
+    }
+
+    const like = (id) => {
+        createPostVote(1, id)
+    }
+
+    const changePostVote = (direction, id) => {
+        const body = {
+            direction: direction
+        }
+        axios.put(`${baseUrl}/posts/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        .then(() => {
+            axios.get(`${baseUrl}/posts`, {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                setFeed(response.data)
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+        })
+        .catch((err) => {
+            console.log(err.response)
+        })
+    }
+
+    const unlike = (id) => {
+        changePostVote(-1, id)
+    }
+
+    const deletePostVote = (id) => {
+        axios.delete(`${baseUrl}/posts/${id}/votes`, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        .then((response) => {
+            console.log(response)
+            axios.get(`${baseUrl}/posts`, {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                setFeed(response.data)
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+        })
+        .catch((err) => {
+            console.log(err.response)
+        })
+    }
+
 
     const feedPosts = feed.map((post) => {
         return (
@@ -39,14 +131,15 @@ const FeedPage = () => {
                         <img
                             src={up}
                             alt={"Seta para cima"}
-                            onClick={onSubmitVote}
+                            onClick={() => like(post.id)}
                         />
-                        {post.userVote}
+                        {post.voteSum}
                         <img
                             src={down}
                             alt={"Seta para baixo"}
-                            onClick={""}
+                            onClick={() => unlike(post.id)}
                         />
+                        <button onClick={() => deletePostVote(post.id)}></button>
                     </PostVotesContainer>
                     <span onClick={() => onClickPostsDetails(post.id)}>{post.commentCount} comments</span>
                 </div>
@@ -56,8 +149,7 @@ const FeedPage = () => {
 
     return (
         <FeedContainer>
-            <h1>Feed</h1>
-            <FeedForm />
+            <FeedForm setFeed={setFeed}/>
             {feedPosts}
         </FeedContainer>
     )

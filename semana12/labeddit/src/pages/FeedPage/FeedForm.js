@@ -1,14 +1,44 @@
 import { TextField, Button } from '@material-ui/core'
 import { SendPostContainer } from './styled'
 import useForm from '../../hooks/useForm'
-import { createPost } from '../../services/posts'
+import axios from 'axios'
+import { baseUrl } from "../../constants/urls";
 
-const FeedForm = () => {
+const FeedForm = (props) => {
+
     const [form, onChange, clear] = useForm({ title: "", body: "" })
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        createPost(form, clear)
+        const body = {
+            title: form.title,
+            body: form.body
+        }
+
+        axios.post(`${baseUrl}/posts`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+            axios.get(`${baseUrl}/posts`, {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                console.log(response)
+                props.setFeed(response.data)
+                clear()
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+        })
+        .catch((err) => {
+            console.log(err.response)
+        })
     }
 
     return (

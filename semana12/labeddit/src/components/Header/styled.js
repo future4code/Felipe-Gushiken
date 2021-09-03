@@ -19,9 +19,12 @@ export const Toolbar = styled.div`
 
 export const HeadContainer = styled(Typography)`
     display: flex;
+
+    h3{
+        cursor: pointer;
+    }
 `
 
 export const ButtonContainer = styled.div`
     
 `
- 

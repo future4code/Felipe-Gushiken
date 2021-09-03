@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import "animate.css"
 
 export const FeedContainer = styled.div`
     display: flex;
@@ -50,4 +51,11 @@ export const PostVotesContainer = styled.div`
         img{
             margin: 0 20px;
         }
+
+        img:hover{
+            cursor: pointer;
+            animation: pulse;
+            animation-duration: 0.7s;
+        }
+
 `

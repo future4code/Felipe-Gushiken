@@ -1,55 +1,140 @@
-import React from 'react'
-import useProtectedPage from '../../hooks/useProtectedPage'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useRequestData from '../../hooks/useRequestData'
+import axios from 'axios'
+import useProtectedPage from '../../hooks/useProtectedPage'
 import { baseUrl } from '../../constants/urls'
-import PostsForm from './PostsForm'
-import { CommentsContainer, MessageContainer, PostVotesContainer } from './styled'
 import up from '../../img/arrow_up.png'
 import down from '../../img/arrow_down.png'
-import axios from 'axios'
+import PostsForm from './PostsForm'
+import { CommentsContainer, MessageContainer, PostVotesContainer } from './styled'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+
 
 const PostsPage = () => {
     useProtectedPage()
 
     const params = useParams()
-    const [comments, setComments] = useRequestData([], `${baseUrl}/posts/${params.id}/comments`)
+    const [comments, setComments] = useState([])
 
-    console.log(params)
-
-    const changeCommentVote = (direction) => {
-        const body = {
-            direction: direction
-        }
-
-        axios.put(`${baseUrl}/comments/${params.id}/votes`, body, {
+    useEffect(() => {
+        axios.get(`${baseUrl}/posts/${params.id}/comments`, {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
         })
+            .then((response) => {
+                setComments(response.data)
+            })
+            .catch(() => {
+                alert("Não foi possível carregar os comentários")
+            })
+    }, [])
+
+    const createCommentVote = (direction, id) => {
+        const body = {
+            direction: direction
+        }
+        axios.post(`${baseUrl}/comments/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+            .then(() => {
+                axios.get(`${baseUrl}/posts/${params.id}/comments`, {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                })
+                    .then((response) => {
+                        setComments(response.data)
+                    })
+                    .catch((err) => {
+                        console.log(err.response)
+                    })
+            })
+            .catch((err) => {
+                console.log(err.response.data)
+            })
     }
 
-    const likeComment = () => {
-        changeCommentVote(-1)
+    const like = (id) => {
+        createCommentVote(1, id)
+    }
+
+    const changeCommentVote = (direction, id) => {
+        const body = {
+            direction: direction
+        }
+        axios.put(`${baseUrl}/comments/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+            .then(() => {
+                axios.get(`${baseUrl}/posts/${params.id}/comments`, {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                })
+                    .then((response) => {
+                        setComments(response.data)
+                    })
+                    .catch((err) => {
+                        console.log(err.response)
+                    })
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+    }
+
+    const unlike = (id) => {
+        changeCommentVote(-1, id)
+    }
+
+    const deleteCommentVote = (id) => {
+        axios.delete(`${baseUrl}/comments/${id}/votes`, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+            .then((response) => {
+                console.log(response)
+                axios.get(`${baseUrl}/posts/${params.id}/comments`, {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                })
+                    .then((response) => {
+                        setComments(response.data)
+                    })
+                    .catch((err) => {
+                        console.log(err.response)
+                    })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const showComments = comments.length > 0 ? comments.map((item) => {
         return (
             <CommentsContainer key={item.id}>
-                <p>by <strong>{item.username}</strong></p>
-                <span>{item.body}</span>
+                <span>{item.body} by <strong>{item.username}</strong></span>
                 <PostVotesContainer>
                     <img
                         src={up}
                         alt={"Seta para cima"}
-                        onClick={likeComment}
+                        onClick={() => like(item.id)}
                     />
                     {item.userVote}
                     <img
                         src={down}
                         alt={"Seta para baixo"}
-                        onClick={""}
+                        onClick={() => unlike(item.id)}
                     />
+                    <button onClick={() => deleteCommentVote(item.id)}></button>
                 </PostVotesContainer>
             </CommentsContainer>
         );
@@ -58,7 +143,7 @@ const PostsPage = () => {
     return (
         <div>
             <p>{showComments}</p>
-            <PostsForm />
+            <PostsForm setComments={setComments} />
         </div>
 
     )

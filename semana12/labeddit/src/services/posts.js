@@ -33,7 +33,7 @@ export const createPostVote = (id, body) => {
 }
 
 
-export const createComment = (id, body, clear) => {
+export const createComment = (id, body, clear, setComments) => {
     axios.post(`${baseUrl}/posts/${id}/comments`, body, {
         headers: {
             Authorization: localStorage.getItem("token")
@@ -42,6 +42,7 @@ export const createComment = (id, body, clear) => {
     .then((response) => {
         alert(response.data)
         clear()
+        setComments()
     })
     .catch((err) => {
         console.log(err)

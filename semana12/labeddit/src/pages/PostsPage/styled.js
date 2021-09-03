@@ -41,4 +41,10 @@ export const PostVotesContainer = styled.div`
         img{
             margin: 3px 20px;
         }
+
+        img:hover{
+            cursor: pointer;
+            animation: pulse;
+            animation-duration: 0.7s;
+        }
 `
