@@ -1,0 +1,26 @@
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+  "name": "Alfred",
+  "email": "alfred@mail.com",
+  "password": "senha123",
+  "role": "ADMIN"
+}
+
+###
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+  "email": "fe@mail.com",
+  "password": "senha123"
+}
+
+###
+GET http://localhost:3003/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg2ZTRhMDVkLTk0ZTktNDFjMC04ZmVmLTNlNjgwYjRiN2RkZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2MzUxOTg0NTAsImV4cCI6MTYzNTIzNDQ1MH0.ZmKMXBo7D7DoGhyBwMO9KSaddHpMr5_Foy5bFmxgc-o
+
+###
+DELETE http://localhost:3003/350a7380-6fc6-40ec-bcb0-fc7e8f024b26
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzOTdmNmQyLTY4YjktNGY0NC1hOTNhLTA5Mjg1MjFjMDE3MyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTYzNTIwNDY2MiwiZXhwIjoxNjM1MjQwNjYyfQ.0KehgN2iIXwLlLNk6VVfL8VIy6nEBAKXnVfq6YlxCfI
