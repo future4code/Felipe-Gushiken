@@ -1,0 +1,24 @@
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+  "name": "Cristian Romero",
+  "email": "romero@mail.com",
+  "age": 23
+}
+
+###
+POST http://localhost:3003/product
+Content-Type: application/json
+
+{
+  "name": "West Ham Home Shirt 21/22",
+  "description": "Show your support for The Hammers this season with this men's West Ham United FC 2021/22 Home Shirt from Umbro.",
+  "price": 65.00
+}
+
+###
+GET http://localhost:3003/user
+
+###
+GET http://localhost:3003/product

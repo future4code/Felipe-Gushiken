@@ -1,0 +1,14 @@
+GET http://localhost:3003/character?name=a
+
+###
+PUT http://localhost:3003/character
+Content-Type: application/json
+
+{
+  "name": "Tony Stark",
+  "gender": "MALE",
+  "description": "Owner of Stark Industries"
+} 
+
+###
+DELETE http://localhost:3003/character/3
