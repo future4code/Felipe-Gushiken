@@ -1,0 +1,43 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+  "name": "J'onn J'onzz",
+  "email": "martianmanhunter@dc.com",
+  "password": "senha123"
+}
+
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "fe@mail.com",
+  "password": "senha123"
+}
+
+###
+POST http://localhost:3003/post/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIzMzMxOGNhLTFiNTktNGM2NC04ZGY3LTMwZGZmNGFjODY1NiIsImlhdCI6MTYzNTUyNzUyMSwiZXhwIjoxNjM1NTYzNTIxfQ.Z2cE8AamRPmPVyI4Q3qXeytmeOQLp2Yz2Yysut3KbwM
+
+{
+  "photo": "https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29kaW5nJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
+  "description": "Airplanes",
+  "type": "normal"
+}
+
+###
+GET http://localhost:3003/post/4536cdca-8c1f-4e5d-8815-101a2f44e508
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIzMzMxOGNhLTFiNTktNGM2NC04ZGY3LTMwZGZmNGFjODY1NiIsImlhdCI6MTYzNTUyNzUyMSwiZXhwIjoxNjM1NTYzNTIxfQ.Z2cE8AamRPmPVyI4Q3qXeytmeOQLp2Yz2Yysut3KbwM
+
+###
+GET http://localhost:3003/post/feed
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIzMzMxOGNhLTFiNTktNGM2NC04ZGY3LTMwZGZmNGFjODY1NiIsImlhdCI6MTYzNTUyNzUyMSwiZXhwIjoxNjM1NTYzNTIxfQ.Z2cE8AamRPmPVyI4Q3qXeytmeOQLp2Yz2Yysut3KbwM
+
+###
+DELETE http://localhost:3003/post/4536cdca-8c1f-4e5d-8815-101a2f44e508
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIzMzMxOGNhLTFiNTktNGM2NC04ZGY3LTMwZGZmNGFjODY1NiIsImlhdCI6MTYzNTUyNzUyMSwiZXhwIjoxNjM1NTYzNTIxfQ.Z2cE8AamRPmPVyI4Q3qXeytmeOQLp2Yz2Yysut3KbwM
