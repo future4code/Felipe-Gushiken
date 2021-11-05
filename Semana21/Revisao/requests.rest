@@ -1,0 +1,10 @@
+GET http://localhost:3003/pokemon
+
+###
+GET http://localhost:3003/pokemon?type=fire
+
+###
+GET http://localhost:3003/pokemon?id=4
+
+###
+GET http://localhost:3003/pokemon?name=gengar
