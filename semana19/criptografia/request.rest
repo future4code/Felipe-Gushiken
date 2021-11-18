@@ -1,0 +1,24 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+  "name": "Cristiano Ronaldo",
+  "nickname": "Ronaldo",
+  "email": "ronaldo@manchesterunited.com",
+  "password": "senha",
+  "role": "NORMAL"
+}
+
+###
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+  "email": "klopp@liverpool.com",
+  "password": "senha"
+}
+
+###
+DELETE http://localhost:3003/users/fbf176bc-8d49-45ea-8d78-a2aa1396008b
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjNmM1MjU1LTk3ODctNDgyNS04ZWMzLWFjOGRmZDExMGU4OSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTYzNDY3NzU4NywiZXhwIjoxNjM0NzEzNTg3fQ.kYwRJ30QxgkzPuBKpjtfTejVt9W_0bCNRyBhgCOVlCU
